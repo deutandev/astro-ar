@@ -13,4 +13,5 @@
   info.addEventListener('click', open); close.addEventListener('click', dismiss);
   modal.addEventListener('click', e => { if (e.target === modal) dismiss(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) dismiss(); });
+  renderZoom();
 })();
