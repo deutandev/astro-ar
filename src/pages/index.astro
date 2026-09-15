@@ -3,33 +3,138 @@
 
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
-  <meta name="theme-color" content="#050814" />
-  <meta name="description" content="Explore a solar system in augmented reality with Astro AR." />
-  <title>Astro AR — Solar System</title>
-  <link rel="stylesheet" href="/styles.css" />
-  <script is:inline src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-  <script is:inline src="https://raw.githack.com/AR-js-org/AR.js/3.4.5/aframe/build/aframe-ar.js"></script>
-</head>
-<body>
-  <div class="hud" aria-label="Astro AR controls">
-    <div class="brand"><span class="brand-mark">✦</span><span>ASTRO <b>AR</b></span></div>
-    <button class="icon-button" id="info-button" aria-label="Open information" aria-haspopup="dialog">i</button>
-    <div class="hint"><span class="pulse"></span><span>Point at a Hiro marker to launch the solar system</span></div>
-    <div class="zoom" aria-label="Zoom controls"><button id="zoom-out" aria-label="Zoom out">−</button><span id="zoom-value">1×</span><button id="zoom-in" aria-label="Zoom in">+</button></div>
-  </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no"
+        />
+        <meta name="theme-color" content="#050814" />
+        <meta
+            name="description"
+            content="Explore a solar system in augmented reality with Astro AR."
+        />
+        <title>Astro AR — Solar System</title>
+        <link rel="stylesheet" href="/styles.css" />
+        <script
+            is:inline
+            src="https://aframe.io/releases/1.6.0/aframe.min.js"
+        ></script>
+        <script
+            is:inline
+            src="https://raw.githack.com/AR-js-org/AR.js/3.4.7/aframe/build/aframe-ar.js"
+        ></script>
+    </head>
+    <body>
+        <div class="hud" aria-label="Astro AR controls">
+            <div class="brand">
+                <span class="brand-mark">✦</span>
+                <span>
+                    ASTRO <b>AR</b>
+                </span>
+            </div>
+            <button
+                class="icon-button"
+                id="info-button"
+                aria-label="Open information"
+                aria-haspopup="dialog"
+            >
+                i
+            </button>
+            <div class="hint">
+                <span class="pulse"></span>
+                <span>Point at a Hiro marker to launch the solar system</span>
+            </div>
+            <div class="zoom" aria-label="Zoom controls">
+                <button id="zoom-out" aria-label="Zoom out">
+                    −
+                </button>
+                <span id="zoom-value">1×</span>
+                <button id="zoom-in" aria-label="Zoom in">
+                    +
+                </button>
+            </div>
+        </div>
 
-  <a-scene embedded vr-mode-ui="enabled: false" renderer="antialias: true; colorManagement: true; logarithmicDepthBuffer: true;" arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;" loading-screen="enabled: false">
-    <a-assets timeout="30000"><a-asset-item id="solar-system" src="/assets/models/scene.gltf"></a-asset-item></a-assets>
-    <a-marker id="marker" preset="hiro" emitevents="true"><a-entity id="solar-model" gltf-model="#solar-system" position="-0.08 0.45 0" rotation="0 0 0" scale="0.04 0.04 0.04"></a-entity></a-marker>
-    <a-entity camera></a-entity>
-  </a-scene>
+        <a-scene
+            embedded
+            vr-mode-ui="enabled: false"
+            renderer="antialias: true; colorManagement: true; logarithmicDepthBuffer: true;"
+            arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;"
+            loading-screen="enabled: false"
+        >
+            <a-assets timeout="30000">
+                <a-asset-item
+                    id="solar-system"
+                    src="/assets/models/scene.gltf"
+                ></a-asset-item>
+            </a-assets>
+            <a-marker id="marker" preset="hiro" emitevents="true">
+                <a-entity
+                    id="solar-model"
+                    gltf-model="#solar-system"
+                    position="0 0 -3"
+                    rotation="0 0 0"
+                    scale="0.04 0.04 0.04"
+                ></a-entity>
+            </a-marker>
+            <a-entity camera></a-entity>
+        </a-scene>
 
-  <div class="modal-backdrop" id="info-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
-    <section class="modal"><button class="close" id="close-modal" aria-label="Close information">×</button><p class="eyebrow">ABOUT THE EXPERIENCE</p><h1 id="modal-title">A pocket-sized cosmos.</h1><p>Hold a Hiro marker in view and explore a living model of our solar system through your camera. Move closer, step back, and use the zoom control to find your favourite orbit.</p><hr /><p class="credit"><strong>3D model</strong><br /><a href="https://skfb.ly/oKOqS" target="_blank" rel="noopener">“Solar System animation”</a> by Samer_Arab_S5<br />Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</p><p class="made-by">Made by <a href="https://deutan.dev" target="_blank" rel="noopener">deutan.dev</a></p></section>
-  </div>
-  <script is:inline src="/app.js"></script>
-</body>
+        <div
+            class="modal-backdrop"
+            id="info-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+            hidden
+        >
+            <section class="modal">
+                <button
+                    class="close"
+                    id="close-modal"
+                    aria-label="Close information"
+                >
+                    ×
+                </button>
+                <p class="eyebrow">ABOUT THE EXPERIENCE</p>
+                <h1 id="modal-title">A pocket-sized cosmos.</h1>
+                <p>
+                    Hold a Hiro marker in view and explore a living model of our
+                    solar system through your camera. Move closer, step back,
+                    and use the zoom control to find your favourite orbit.
+                </p>
+                <hr />
+                <p class="credit">
+                    <strong>3D model</strong>
+                    <br />
+                    <a
+                        href="https://skfb.ly/oKOqS"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        “Solar System animation”
+                    </a>{" "}
+                    by Samer_Arab_S5
+                    <br />
+                    Licensed under{" "}
+                    <a
+                        href="https://creativecommons.org/licenses/by/4.0/"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        CC BY 4.0
+                    </a>
+                    .
+                </p>
+                <p class="made-by">
+                    Made by{" "}
+                    <a href="https://deutan.dev" target="_blank" rel="noopener">
+                        deutan.dev
+                    </a>
+                </p>
+            </section>
+        </div>
+        <script is:inline src="/app.js"></script>
+    </body>
 </html>
