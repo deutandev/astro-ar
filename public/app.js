@@ -12,8 +12,8 @@
   const setLanguage = (language) => { const copy = languages[language]; document.querySelector('#modal-eyebrow').textContent = copy.eyebrow; document.querySelector('#modal-title').textContent = copy.title; document.querySelector('#modal-description').textContent = copy.description; document.querySelector('#how-to-label').textContent = copy.howLabel; document.querySelector('#how-to-copy').textContent = copy.howCopy; document.querySelector('#marker-link').textContent = copy.marker; document.querySelector('#model-label').textContent = copy.model; document.querySelector('#license-prefix').textContent = copy.license; document.querySelector('#made-by-label').textContent = copy.madeBy; document.querySelector('#github-link').textContent = copy.github; document.querySelector('#lang-id').setAttribute('aria-pressed', language === 'id'); document.querySelector('#lang-en').setAttribute('aria-pressed', language === 'en'); document.documentElement.lang = language === 'id' ? 'id' : 'en'; };
   document.querySelector('#lang-id').addEventListener('click', () => setLanguage('id')); document.querySelector('#lang-en').addEventListener('click', () => setLanguage('en')); setLanguage('id');
   const renderZoom = () => { model.setAttribute('scale', `${(zoom * .04).toFixed(3)} ${(zoom * .04).toFixed(3)} ${(zoom * .04).toFixed(3)}`); value.textContent = `${zoom}×`; };
-  document.querySelector('#zoom-in').addEventListener('click', () => { zoom = Math.min(3, +(zoom + .5).toFixed(1)); renderZoom(); });
-  document.querySelector('#zoom-out').addEventListener('click', () => { zoom = Math.max(.5, +(zoom - .5).toFixed(1)); renderZoom(); });
+  document.querySelector('#zoom-in').addEventListener('click', () => { zoom = Math.min(8, +(zoom + .5).toFixed(1)); renderZoom(); });
+  document.querySelector('#zoom-out').addEventListener('click', () => { zoom = Math.max(.1, +(zoom - .5).toFixed(1)); renderZoom(); });
   const open = () => { modal.hidden = false; close.focus(); };
   const dismiss = () => { modal.hidden = true; info.focus(); };
   info.addEventListener('click', open); close.addEventListener('click', dismiss);
