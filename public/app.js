@@ -5,6 +5,24 @@
   const info = document.querySelector('#info-button');
   const close = document.querySelector('#close-modal');
   let zoom = 1;
+  const hideLunarObjects = () => model.object3D.traverse((node) => { if (node.name.toLowerCase().startsWith('moon_')) node.visible = false; });
+  setInterval(hideLunarObjects, 500);
+  const orbitPeriods = { mercury: 0.24, venus: 0.615, erath: 1, mars: 1.88, jupiter: 11.86, saturn: 29.46, uranus: 84, neptune: 164.8, pluto: 248 };
+  const orbitNodes = [];
+  model.addEventListener('model-loaded', () => {
+    model.object3D.traverse((node) => {
+      const name = node.name.toLowerCase();
+      if (name.startsWith('moon_')) { node.visible = false; return; }
+      const planet = Object.keys(orbitPeriods).find((key) => name.startsWith(`${key}_beziercircle`) && !name.includes('001'));
+      if (planet) orbitNodes.push({ node, speed: (Math.PI * 2) / (orbitPeriods[planet] * 12) });
+    });
+    let previous = performance.now();
+    const animateOrbits = (now) => { const delta = Math.min((now - previous) / 1000, 0.1); previous = now; orbitNodes.forEach(({ node, speed }) => { node.rotation.y += speed * delta; }); requestAnimationFrame(animateOrbits); };
+    requestAnimationFrame(animateOrbits);
+    const hideMoons = () => model.object3D.traverse((node) => { if (node.name.toLowerCase().startsWith('moon_')) node.visible = false; });
+    hideMoons();
+    setTimeout(hideMoons, 500);
+  });
   const languages = {
     id: { eyebrow: 'TENTANG PENGALAMAN', title: 'Kosmos dalam genggaman.', description: 'Arahkan kamera ke marker bitmap untuk menjelajahi model tata surya melalui kamera. Bergerak lebih dekat, menjauh, dan gunakan kontrol zoom untuk menemukan orbit favoritmu.', howLabel: 'CARA MENGGUNAKAN', howCopy: 'Izinkan akses kamera, lalu arahkan ponsel ke marker bitmap yang dicetak. Bergerak lebih dekat atau menjauh untuk menjelajahi model.', marker: 'Lihat / simpan gambar marker ↗', model: 'Model 3D', license: 'Dilisensikan di bawah ', madeBy: 'Dibuat oleh ', github: 'Lihat proyek di GitHub ↗' },
     en: { eyebrow: 'ABOUT THE EXPERIENCE', title: 'A pocket-sized cosmos.', description: 'Hold the bitmap marker in view and explore a living model of our solar system through your camera. Move closer, step back, and use the zoom control to find your favourite orbit.', howLabel: 'HOW TO USE', howCopy: 'Allow camera access, then point your phone at a printed bitmap marker. Move closer or farther away to explore the model.', marker: 'View / save the marker image ↗', model: '3D MODEL', license: 'Licensed under ', madeBy: 'Made by ', github: 'View project on GitHub ↗' }
