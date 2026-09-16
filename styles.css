@@ -21,4 +21,5 @@ a-scene { position: fixed; inset: 0; }
 @media (max-width:599px) { .zoom { margin-right:62px; }.modal { width:calc(100vw - 8px); } }
 .modal { display:flex; flex-direction:column; }
 .modal-footer { margin-top:auto; padding-top:18px; border-top:1px solid #ffffff1c; text-align:center; font-size:13px; }.modal-footer p { margin:0 0 8px; }.modal-footer .credit { font-size:13px!important; }.modal-footer a { color:#ffefaa; }
+.how-to { padding:14px 16px; border:1px solid #ffefaa26; border-radius:12px; background:#ffefaa0d; }.how-to strong { color:#ffefaa; font-size:11px; letter-spacing:.1em; }.how-to a { color:#9bdcf0; }
 @media (min-width: 600px) { .hud { padding-left:32px; padding-right:32px; }.modal { padding:38px 34px 30px; } }
