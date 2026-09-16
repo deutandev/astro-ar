@@ -19,4 +19,6 @@ a-scene { position: fixed; inset: 0; }
 .modal-backdrop { display:flex; align-items:stretch; justify-content:flex-end; padding:0; background:#05081488; backdrop-filter:blur(18px); }.modal { display:flex; flex-direction:column; width:min(420px,92vw); max-width:none; height:100%; overflow:auto; border-radius:16px 0 0 16px; background:linear-gradient(155deg,#1d3154ef,#0b1428f2); box-shadow:-22px 0 70px #0008; animation:slide-in .28s ease-out both; }.modal .close { width:40px; height:40px; display:grid; place-items:center; font-family:Arial,sans-serif; font-size:25px; line-height:1; color:#fff2b0; }.modal-footer { margin-top:auto; text-align:center; border-top:1px solid #ffefaa26; padding-top:18px; }
 @keyframes slide-in { from { opacity:0; transform:translateX(100%); } to { opacity:1; transform:translateX(0); } }
 @media (max-width:599px) { .zoom { margin-right:62px; }.modal { width:calc(100vw - 8px); } }
+.modal { display:flex; flex-direction:column; }
+.modal-footer { margin-top:auto; padding-top:18px; border-top:1px solid #ffffff1c; text-align:center; font-size:13px; }.modal-footer p { margin:0 0 8px; }.modal-footer .credit { font-size:13px!important; }.modal-footer a { color:#ffefaa; }
 @media (min-width: 600px) { .hud { padding-left:32px; padding-right:32px; }.modal { padding:38px 34px 30px; } }
