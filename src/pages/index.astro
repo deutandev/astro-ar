@@ -65,7 +65,7 @@
                     src="/assets/models/scene.gltf"
                 ></a-asset-item>
             </a-assets>
-            <a-marker id="marker" preset="hiro" emitevents="true">
+            <a-marker id="marker" type="pattern" url="/markers/pattern-bitmap.patt" emitevents="true">
                 <a-entity
                     id="solar-model"
                     gltf-model="#solar-system"
@@ -96,8 +96,8 @@
                 <div class="language-toggle" role="group" aria-label="Pilihan bahasa"><button id="lang-id" type="button" aria-pressed="true">ID</button><button id="lang-en" type="button" aria-pressed="false">EN</button></div>
                 <p class="eyebrow" id="modal-eyebrow">TENTANG PENGALAMAN</p>
                 <h1 id="modal-title">Kosmos dalam genggaman.</h1>
-                <p id="modal-description">Arahkan kamera ke marker Hiro untuk menjelajahi model tata surya melalui kamera. Bergerak lebih dekat, menjauh, dan gunakan kontrol zoom untuk menemukan orbit favoritmu.</p>
-                <p class="how-to"><strong id="how-to-label">CARA MENGGUNAKAN</strong><br /><span id="how-to-copy">Izinkan akses kamera, lalu arahkan ponsel ke marker Hiro yang dicetak. Bergerak lebih dekat atau menjauh untuk menjelajahi model.</span><br /><a id="marker-link" href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/hiro.png" target="_blank" rel="noopener">Lihat / simpan gambar marker ↗</a></p>
+                <p id="modal-description">Arahkan kamera ke marker bitmap untuk menjelajahi model tata surya melalui kamera. Bergerak lebih dekat, menjauh, dan gunakan kontrol zoom untuk menemukan orbit favoritmu.</p>
+                <p class="how-to"><strong id="how-to-label">CARA MENGGUNAKAN</strong><br /><span id="how-to-copy">Izinkan akses kamera, lalu arahkan ponsel ke marker bitmap yang dicetak. Bergerak lebih dekat atau menjauh untuk menjelajahi model.</span><br /><a id="marker-link" href="/markers/pattern-bitmap.png" target="_blank" rel="noopener">Lihat / simpan gambar marker ↗</a></p>
                 <hr />
                 <footer class="modal-footer">
                     <p class="credit"><strong id="model-label">Model 3D</strong><br /><a href="https://skfb.ly/oKOqS" target="_blank" rel="noopener">“Solar System animation”</a> oleh Samer_Arab_S5<br /><span id="license-prefix">Dilisensikan di bawah </span><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</p>
