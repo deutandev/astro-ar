@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="/styles.css" />
         <script is:inline src="/ar/lib/aframe.min.js"></script>
         <script is:inline src="/ar/lib/aframe-ar.js"></script>
+        <script is:inline src="/ar/lib/aframe-extras.loaders.min.js"></script>
     </head>
     <body>
         <div class="hud" aria-label="Astro AR controls">
@@ -63,6 +64,7 @@
                 <a-entity
                     id="solar-model"
                     gltf-model="#solar-system"
+                    animation-mixer="clip: *; loop: repeat; repetitions: 999999"
                     position="0 0 0"
                     rotation="0 0 0"
                     scale="0.04 0.04 0.04"
