@@ -24,7 +24,13 @@ bun run preview
 
 ## Deployment
 
-Pushes to `main` or a manual **Run workflow** dispatch run `.github/workflows/deploy.yml`. The workflow installs dependencies, builds the static Astro output, and syncs `dist/` to `/var/www/ar/`. Configure repository secrets `VPS_SSH_KEY`, `VPS_USER`, and `VPS_HOST`; point `ar.deutan.dev` at that VPS directory in nginx. The workflow does not push or mutate the repository.
+Pushes to `main` or a manual **Run workflow** dispatch run `.github/workflows/deploy.yml`. The workflow installs dependencies, builds the static Astro output, validates deployment configuration, and syncs `dist/` to `/var/www/ar/` over SSH. Before running it, add these repository secrets under **Settings → Secrets and variables → Actions**:
+
+- `VPS_SSH_KEY`: the private deploy key, including the `BEGIN`/`END` lines
+- `VPS_USER`: the SSH username
+- `VPS_HOST`: the VPS hostname or IP address
+
+Point `ar.deutan.dev` at `/var/www/ar/` in nginx. If a secret is missing, the workflow stops before loading the SSH action and reports the exact missing name. The workflow does not push or mutate the repository.
 
 ## Attribution
 
