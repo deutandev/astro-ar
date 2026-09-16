@@ -59,11 +59,16 @@
                     src="/assets/models/scene.gltf"
                 ></a-asset-item>
             </a-assets>
-            <a-marker id="marker" type="pattern" url="/markers/pattern-bitmap.patt" emitevents="true">
+            <a-marker
+                id="marker"
+                type="pattern"
+                url="/markers/pattern-bitmap.patt"
+                emitevents="true"
+            >
                 <a-entity
                     id="solar-model"
                     gltf-model="#solar-system"
-                    position="0 0 0"
+                    position="0 0 -1.5"
                     rotation="0 0 0"
                     scale="0.04 0.04 0.04"
                 ></a-entity>
@@ -87,16 +92,88 @@
                 >
                     ×
                 </button>
-                <div class="language-toggle" role="group" aria-label="Pilihan bahasa"><button id="lang-id" type="button" aria-pressed="true">ID</button><button id="lang-en" type="button" aria-pressed="false">EN</button></div>
-                <p class="eyebrow" id="modal-eyebrow">TENTANG PENGALAMAN</p>
-                <h1 id="modal-title">Kosmos dalam genggaman.</h1>
-                <p id="modal-description">Arahkan kamera ke marker bitmap untuk menjelajahi model tata surya melalui kamera. Bergerak lebih dekat, menjauh, dan gunakan kontrol zoom untuk menemukan orbit favoritmu.</p>
-                <p class="how-to"><strong id="how-to-label">CARA MENGGUNAKAN</strong><br /><span id="how-to-copy">Izinkan akses kamera, lalu arahkan ponsel ke marker bitmap yang dicetak. Bergerak lebih dekat atau menjauh untuk menjelajahi model.</span><br /><a id="marker-link" href="/markers/pattern-bitmap.png" target="_blank" rel="noopener">Lihat / simpan gambar marker ↗</a></p>
+                <div
+                    class="language-toggle"
+                    role="group"
+                    aria-label="Pilihan bahasa"
+                >
+                    <button id="lang-id" type="button" aria-pressed="true">
+                        ID
+                    </button>
+                    <button id="lang-en" type="button" aria-pressed="false">
+                        EN
+                    </button>
+                </div>
+                <p class="eyebrow" id="modal-eyebrow">
+                    INFORMASI
+                </p>
+                <h1 id="modal-title">Tata Surya dalam genggaman.</h1>
+                <p id="modal-description">
+                    Arahkan kamera ke marker bitmap untuk menjelajahi model tata
+                    surya melalui kamera. Bergerak lebih dekat, menjauh, dan
+                    gunakan kontrol zoom untuk menemukan orbit favoritmu.
+                </p>
+                <p class="how-to">
+                    <strong id="how-to-label">CARA MENGGUNAKAN</strong>
+                    <br />
+                    <span id="how-to-copy">
+                        Izinkan akses kamera, lalu arahkan ponsel ke marker
+                        bitmap yang dicetak. Bergerak lebih dekat atau menjauh
+                        untuk menjelajahi model.
+                    </span>
+                    <br />
+                    <a
+                        id="marker-link"
+                        href="/markers/pattern-bitmap.png"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        Lihat / simpan gambar marker ↗
+                    </a>
+                </p>
                 <hr />
                 <footer class="modal-footer">
-                    <p class="credit"><strong id="model-label">Model 3D</strong><br /><a href="https://skfb.ly/oKOqS" target="_blank" rel="noopener">“Solar System animation”</a> oleh Samer_Arab_S5<br /><span id="license-prefix">Dilisensikan di bawah </span><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</p>
-                    <p><span id="made-by-label">Dibuat oleh </span><a href="https://deutan.dev" target="_blank" rel="noopener">deutan.dev</a></p>
-                    <a id="github-link" href="https://github.com/deutandev/astro-ar" target="_blank" rel="noopener">Lihat proyek di GitHub ↗</a>
+                    <p class="credit">
+                        <strong id="model-label">Model 3D</strong>
+                        <br />
+                        <a
+                            href="https://skfb.ly/oKOqS"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            “Solar System animation”
+                        </a>{" "}
+                        oleh Samer_Arab_S5
+                        <br />
+                        <span id="license-prefix">Dilisensikan di bawah </span>
+                        <a
+                            href="https://creativecommons.org/licenses/by/4.0/"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            CC BY 4.0
+                        </a>
+                        .
+                    </p>
+                    <p>
+                        <span id="made-by-label">Dibuat dengan 💙 oleh </span>
+                        <a
+                            href="https://deutan.dev"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            deutan.dev
+                        </a>{" "}
+                        |{" "}
+                        <a
+                            id="github-link"
+                            href="https://github.com/deutandev/astro-ar"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            GitHub ↗
+                        </a>
+                    </p>
                 </footer>
             </section>
         </div>

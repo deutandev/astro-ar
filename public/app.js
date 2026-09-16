@@ -1,41 +1,148 @@
 (() => {
-  const model = document.querySelector('#solar-model');
-  const value = document.querySelector('#zoom-value');
-  const modal = document.querySelector('#info-modal');
-  const info = document.querySelector('#info-button');
-  const close = document.querySelector('#close-modal');
+  const model = document.querySelector("#solar-model");
+  const value = document.querySelector("#zoom-value");
+  const modal = document.querySelector("#info-modal");
+  const info = document.querySelector("#info-button");
+  const close = document.querySelector("#close-modal");
   let zoom = 1;
-  const hideLunarObjects = () => model.object3D.traverse((node) => { if (node.name.toLowerCase().startsWith('moon_')) node.visible = false; });
+  const hideLunarObjects = () =>
+    model.object3D.traverse((node) => {
+      if (node.name.toLowerCase().startsWith("moon_")) node.visible = false;
+    });
   setInterval(hideLunarObjects, 500);
-  const orbitPeriods = { mercury: 0.24, venus: 0.615, erath: 1, mars: 1.88, jupiter: 11.86, saturn: 29.46, uranus: 84, neptune: 164.8, pluto: 248 };
+  const orbitPeriods = {
+    mercury: 0.24,
+    venus: 0.615,
+    erath: 1,
+    mars: 1.88,
+    jupiter: 11.86,
+    saturn: 29.46,
+    uranus: 84,
+    neptune: 164.8,
+    pluto: 248,
+  };
   const orbitNodes = [];
-  model.addEventListener('model-loaded', () => {
+  model.addEventListener("model-loaded", () => {
     model.object3D.traverse((node) => {
       const name = node.name.toLowerCase();
-      if (name.startsWith('moon_')) { node.visible = false; return; }
-      const planet = Object.keys(orbitPeriods).find((key) => name.startsWith(`${key}_beziercircle`) && !name.includes('001'));
-      if (planet) orbitNodes.push({ node, speed: (Math.PI * 2) / (orbitPeriods[planet] * 12) });
+      if (name.startsWith("moon_")) {
+        node.visible = false;
+        return;
+      }
+      const planet = Object.keys(orbitPeriods).find(
+        (key) =>
+          name.startsWith(`${key}_beziercircle`) && !name.includes("001"),
+      );
+      if (planet)
+        orbitNodes.push({
+          node,
+          speed: (Math.PI * 2) / (orbitPeriods[planet] * 12),
+        });
     });
     let previous = performance.now();
-    const animateOrbits = (now) => { const delta = Math.min((now - previous) / 1000, 0.1); previous = now; orbitNodes.forEach(({ node, speed }) => { node.rotation.y += speed * delta; }); requestAnimationFrame(animateOrbits); };
+    const animateOrbits = (now) => {
+      const delta = Math.min((now - previous) / 1000, 0.1);
+      previous = now;
+      orbitNodes.forEach(({ node, speed }) => {
+        node.rotation.y += speed * delta;
+      });
+      requestAnimationFrame(animateOrbits);
+    };
     requestAnimationFrame(animateOrbits);
-    const hideMoons = () => model.object3D.traverse((node) => { if (node.name.toLowerCase().startsWith('moon_')) node.visible = false; });
+    const hideMoons = () =>
+      model.object3D.traverse((node) => {
+        if (node.name.toLowerCase().startsWith("moon_")) node.visible = false;
+      });
     hideMoons();
     setTimeout(hideMoons, 500);
   });
   const languages = {
-    id: { eyebrow: 'TENTANG PENGALAMAN', title: 'Kosmos dalam genggaman.', description: 'Arahkan kamera ke marker bitmap untuk menjelajahi model tata surya melalui kamera. Bergerak lebih dekat, menjauh, dan gunakan kontrol zoom untuk menemukan orbit favoritmu.', howLabel: 'CARA MENGGUNAKAN', howCopy: 'Izinkan akses kamera, lalu arahkan ponsel ke marker bitmap yang dicetak. Bergerak lebih dekat atau menjauh untuk menjelajahi model.', marker: 'Lihat / simpan gambar marker ↗', model: 'Model 3D', license: 'Dilisensikan di bawah ', madeBy: 'Dibuat oleh ', github: 'Lihat proyek di GitHub ↗' },
-    en: { eyebrow: 'ABOUT THE EXPERIENCE', title: 'A pocket-sized cosmos.', description: 'Hold the bitmap marker in view and explore a living model of our solar system through your camera. Move closer, step back, and use the zoom control to find your favourite orbit.', howLabel: 'HOW TO USE', howCopy: 'Allow camera access, then point your phone at a printed bitmap marker. Move closer or farther away to explore the model.', marker: 'View / save the marker image ↗', model: '3D MODEL', license: 'Licensed under ', madeBy: 'Made by ', github: 'View project on GitHub ↗' }
+    id: {
+      eyebrow: "INFORMASI",
+      title: "Tata Surya dalam genggaman.",
+      description:
+        "Arahkan kamera ke marker bitmap untuk menjelajahi model tata surya melalui kamera. Bergerak lebih dekat, menjauh, dan gunakan kontrol zoom untuk menemukan orbit favoritmu.",
+      howLabel: "CARA MENGGUNAKAN",
+      howCopy:
+        "Izinkan akses kamera, lalu arahkan ponsel ke marker bitmap yang dicetak. Bergerak lebih dekat atau menjauh untuk menjelajahi model.",
+      marker: "Lihat / simpan gambar marker ↗",
+      model: "Model 3D",
+      license: "Di bawah lisensi ",
+      madeBy: "Dibuat dengan 💙 oleh ",
+      github: "GitHub ↗",
+    },
+    en: {
+      eyebrow: "ABOUT THE EXPERIENCE",
+      title: "A pocket-sized cosmos.",
+      description:
+        "Hold the bitmap marker in view and explore a living model of our solar system through your camera. Move closer, step back, and use the zoom control to find your favourite orbit.",
+      howLabel: "HOW TO USE",
+      howCopy:
+        "Allow camera access, then point your phone at a printed bitmap marker. Move closer or farther away to explore the model.",
+      marker: "View / save the marker image ↗",
+      model: "3D MODEL",
+      license: "Licensed under ",
+      madeBy: "Made with 💙 by ",
+      github: "View on GitHub ↗",
+    },
   };
-  const setLanguage = (language) => { const copy = languages[language]; document.querySelector('#modal-eyebrow').textContent = copy.eyebrow; document.querySelector('#modal-title').textContent = copy.title; document.querySelector('#modal-description').textContent = copy.description; document.querySelector('#how-to-label').textContent = copy.howLabel; document.querySelector('#how-to-copy').textContent = copy.howCopy; document.querySelector('#marker-link').textContent = copy.marker; document.querySelector('#model-label').textContent = copy.model; document.querySelector('#license-prefix').textContent = copy.license; document.querySelector('#made-by-label').textContent = copy.madeBy; document.querySelector('#github-link').textContent = copy.github; document.querySelector('#lang-id').setAttribute('aria-pressed', language === 'id'); document.querySelector('#lang-en').setAttribute('aria-pressed', language === 'en'); document.documentElement.lang = language === 'id' ? 'id' : 'en'; };
-  document.querySelector('#lang-id').addEventListener('click', () => setLanguage('id')); document.querySelector('#lang-en').addEventListener('click', () => setLanguage('en')); setLanguage('id');
-  const renderZoom = () => { model.setAttribute('scale', `${(zoom * .04).toFixed(3)} ${(zoom * .04).toFixed(3)} ${(zoom * .04).toFixed(3)}`); value.textContent = `${zoom}×`; };
-  document.querySelector('#zoom-in').addEventListener('click', () => { zoom = Math.min(8, +(zoom + .5).toFixed(1)); renderZoom(); });
-  document.querySelector('#zoom-out').addEventListener('click', () => { zoom = Math.max(.1, +(zoom - .5).toFixed(1)); renderZoom(); });
-  const open = () => { modal.hidden = false; close.focus(); };
-  const dismiss = () => { modal.hidden = true; info.focus(); };
-  info.addEventListener('click', open); close.addEventListener('click', dismiss);
-  modal.addEventListener('click', e => { if (e.target === modal) dismiss(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) dismiss(); });
+  const setLanguage = (language) => {
+    const copy = languages[language];
+    document.querySelector("#modal-eyebrow").textContent = copy.eyebrow;
+    document.querySelector("#modal-title").textContent = copy.title;
+    document.querySelector("#modal-description").textContent = copy.description;
+    document.querySelector("#how-to-label").textContent = copy.howLabel;
+    document.querySelector("#how-to-copy").textContent = copy.howCopy;
+    document.querySelector("#marker-link").textContent = copy.marker;
+    document.querySelector("#model-label").textContent = copy.model;
+    document.querySelector("#license-prefix").textContent = copy.license;
+    document.querySelector("#made-by-label").textContent = copy.madeBy;
+    document.querySelector("#github-link").textContent = copy.github;
+    document
+      .querySelector("#lang-id")
+      .setAttribute("aria-pressed", language === "id");
+    document
+      .querySelector("#lang-en")
+      .setAttribute("aria-pressed", language === "en");
+    document.documentElement.lang = language === "id" ? "id" : "en";
+  };
+  document
+    .querySelector("#lang-id")
+    .addEventListener("click", () => setLanguage("id"));
+  document
+    .querySelector("#lang-en")
+    .addEventListener("click", () => setLanguage("en"));
+  setLanguage("id");
+  const renderZoom = () => {
+    model.setAttribute(
+      "scale",
+      `${(zoom * 0.04).toFixed(3)} ${(zoom * 0.04).toFixed(3)} ${(zoom * 0.04).toFixed(3)}`,
+    );
+    value.textContent = `${zoom}×`;
+  };
+  document.querySelector("#zoom-in").addEventListener("click", () => {
+    zoom = Math.min(8, +(zoom + 0.5).toFixed(1));
+    renderZoom();
+  });
+  document.querySelector("#zoom-out").addEventListener("click", () => {
+    zoom = Math.max(0.1, +(zoom - 0.5).toFixed(1));
+    renderZoom();
+  });
+  const open = () => {
+    modal.hidden = false;
+    close.focus();
+  };
+  const dismiss = () => {
+    modal.hidden = true;
+    info.focus();
+  };
+  info.addEventListener("click", open);
+  close.addEventListener("click", dismiss);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) dismiss();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.hidden) dismiss();
+  });
   renderZoom();
 })();
