@@ -12,7 +12,7 @@
   model.addEventListener("model-loaded", finishModelLoading);
   model.addEventListener("model-error", () => { loader.classList.add("is-error"); loaderText.textContent = "Model gagal dimuat. Coba muat ulang halaman."; });
   if (model.getObject3D("mesh")) finishModelLoading();
-  setTimeout(() => { if (!modelReady && !loader.classList.contains("is-error")) loaderText.textContent = "Model masih dimuat…"; }, 4000);
+  setTimeout(() => { if (!modelReady && !loader.classList.contains("is-error")) loaderText.textContent = "Sedang memuat…"; }, 4000);
   const hideLunarObjects = () =>
     model.object3D.traverse((node) => {
       if (node.name.toLowerCase().startsWith("moon_")) node.visible = false;
