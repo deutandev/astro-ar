@@ -75,6 +75,15 @@
             </a-marker>
             <a-entity camera></a-entity>
         </a-scene>
+        <div
+            class="model-loader"
+            id="model-loader"
+            role="status"
+            aria-live="polite"
+        >
+            <span class="loader-orbit"></span>
+            <span id="model-loader-text">Sedang memuat…</span>
+        </div>
 
         <div
             class="modal-backdrop"
@@ -113,39 +122,64 @@
                     surya melalui kamera. Bergerak lebih dekat, menjauh, dan
                     gunakan kontrol zoom untuk menemukan orbit favoritmu.
                 </p>
-                <p class="how-to">
+                <section class="how-to" aria-labelledby="how-to-label">
                     <strong id="how-to-label">CARA MENGGUNAKAN</strong>
-                    <br />
-                    <span id="how-to-copy">
-                        Izinkan akses kamera, lalu arahkan ponsel ke marker
-                        bitmap yang dicetak. Bergerak lebih dekat atau menjauh
-                        untuk menjelajahi model.
-                    </span>
-                    <br />
+                    <ol class="how-to-steps">
+                        <li id="how-step-one">
+                            Buka{" "}
+                            <a
+                                href="https://ar.deutan.dev/"
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                ar.deutan.dev
+                            </a>{" "}
+                            (udah di sini, sih)
+                        </li>
+                        <li id="how-step-two">
+                            Pindai marker berikut dengan kamera
+                        </li>
+                    </ol>
                     <a
-                        id="marker-link"
+                        id="marker-preview"
+                        class="marker-preview"
                         href="/markers/pattern-bitmap.png"
                         target="_blank"
                         rel="noopener"
                     >
-                        Lihat / simpan gambar marker ↗
+                        <img
+                            src="/markers/pattern-bitmap.png"
+                            alt="Marker bitmap Astro AR"
+                        />
                     </a>
-                </p>
+                    <a
+                        id="marker-download"
+                        class="marker-download"
+                        href="/markers/pattern-bitmap.png"
+                        download
+                    >
+                        Unduh gambar marker ↗
+                    </a>
+                    <p id="how-step-three">
+                        Jaga marker tetap terlihat, lalu gerakkan ponsel untuk
+                        menjelajahi model.
+                    </p>
+                </section>
                 <hr />
                 <footer class="modal-footer">
                     <p class="credit">
-                        <strong id="model-label">Model 3D</strong>
-                        <br />
+                        <strong id="model-label">Model 3D: </strong>
                         <a
                             href="https://skfb.ly/oKOqS"
                             target="_blank"
                             rel="noopener"
                         >
                             “Solar System animation”
-                        </a>{" "}
+                        </a>
+                        <br />
                         oleh Samer_Arab_S5
                         <br />
-                        <span id="license-prefix">Dilisensikan di bawah </span>
+                        <span id="license-prefix">Di bawah lisensi </span>
                         <a
                             href="https://creativecommons.org/licenses/by/4.0/"
                             target="_blank"

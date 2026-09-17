@@ -1,6 +1,6 @@
 # Astro AR
 
-A lightweight Astro + AR.js solar-system experience. Point a phone at a Hiro marker to reveal the supplied 3D model.
+Astro AR is a lightweight Astro + AR.js solar-system experience. A printed bitmap marker anchors a 3D visualization in the camera view.
 
 ## Development
 
@@ -18,9 +18,17 @@ bun run preview
 
 ## Controls
 
-- Point the camera at a Hiro marker.
+- Point the camera at the supplied bitmap marker.
 - Use `+` and `−` to change the model scale.
-- Open `i` for instructions and attribution.
+- Open `i` for the bilingual information panel.
+- Switch between Indonesian (`ID`) and English (`EN`) in the information panel.
+
+## Visualization notes
+
+- Planet orbits are animated procedurally and run continuously.
+- Relative orbital speeds are based on the planets’ orbital periods, with time accelerated for a usable AR demonstration.
+- Planet sizes and distances are intentionally **not to scale**; real solar-system proportions would make the outer planets and smaller worlds impossible to see together.
+- The Moon is omitted so the visualization focuses on the planets and their solar orbits.
 
 ## Deployment
 

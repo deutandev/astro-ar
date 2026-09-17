@@ -5,6 +5,14 @@
   const info = document.querySelector("#info-button");
   const close = document.querySelector("#close-modal");
   let zoom = 1;
+  const loader = document.querySelector("#model-loader");
+  const loaderText = document.querySelector("#model-loader-text");
+  let modelReady = false;
+  const finishModelLoading = () => { if (modelReady) return; modelReady = true; loader.classList.add("is-ready"); };
+  model.addEventListener("model-loaded", finishModelLoading);
+  model.addEventListener("model-error", () => { loader.classList.add("is-error"); loaderText.textContent = "Model gagal dimuat. Coba muat ulang halaman."; });
+  if (model.getObject3D("mesh")) finishModelLoading();
+  setTimeout(() => { if (!modelReady && !loader.classList.contains("is-error")) loaderText.textContent = "Model masih dimuat…"; }, 4000);
   const hideLunarObjects = () =>
     model.object3D.traverse((node) => {
       if (node.name.toLowerCase().startsWith("moon_")) node.visible = false;
@@ -61,25 +69,27 @@
       eyebrow: "INFORMASI",
       title: "Tata Surya dalam genggaman.",
       description:
-        "Arahkan kamera ke marker bitmap untuk menjelajahi model tata surya melalui kamera. Bergerak lebih dekat, menjauh, dan gunakan kontrol zoom untuk menemukan orbit favoritmu.",
+        "Astro AR menampilkan planet-planet dalam model 3D dengan orbit yang dianimasikan. Perbandingan kecepatan revolusi mengikuti periode orbit relatif antar planet, tetapi ukuran planet dan jarak antarorbit tidak berskala nyata agar seluruh sistem tetap terlihat jelas.",
       howLabel: "CARA MENGGUNAKAN",
-      howCopy:
-        "Izinkan akses kamera, lalu arahkan ponsel ke marker bitmap yang dicetak. Bergerak lebih dekat atau menjauh untuk menjelajahi model.",
-      marker: "Lihat / simpan gambar marker ↗",
+      howStepOne: "Buka",
+      howStepTwo: "Pindai marker berikut dengan kamera",
+      howStepThree: "Jaga marker tetap terlihat, lalu gerakkan ponsel untuk menjelajahi model.",
+      marker: "Unduh gambar marker ↗",
       model: "Model 3D",
       license: "Di bawah lisensi ",
       madeBy: "Dibuat dengan 💙 oleh ",
       github: "GitHub ↗",
     },
     en: {
-      eyebrow: "ABOUT THE EXPERIENCE",
-      title: "A pocket-sized cosmos.",
+      eyebrow: "ABOUT THE VISUALIZATION",
+      title: "Understanding the solar system.",
       description:
-        "Hold the bitmap marker in view and explore a living model of our solar system through your camera. Move closer, step back, and use the zoom control to find your favourite orbit.",
+        "Astro AR displays the planets in a 3D model with procedurally animated orbits. Relative orbital speeds follow the planets’ orbital periods, but planet sizes and distances are not to scale so the complete system remains visible.",
       howLabel: "HOW TO USE",
-      howCopy:
-        "Allow camera access, then point your phone at a printed bitmap marker. Move closer or farther away to explore the model.",
-      marker: "View / save the marker image ↗",
+      howStepOne: "Visit",
+      howStepTwo: "Scan this marker with your camera",
+      howStepThree: "Keep the marker visible, then move your phone to explore the orbits.",
+      marker: "Download marker image ↗",
       model: "3D MODEL",
       license: "Licensed under ",
       madeBy: "Made with 💙 by ",
@@ -92,12 +102,10 @@
     document.querySelector("#modal-title").textContent = copy.title;
     document.querySelector("#modal-description").textContent = copy.description;
     document.querySelector("#how-to-label").textContent = copy.howLabel;
-    document.querySelector("#how-to-copy").textContent = copy.howCopy;
-    document.querySelector("#marker-link").textContent = copy.marker;
-    document.querySelector("#model-label").textContent = copy.model;
-    document.querySelector("#license-prefix").textContent = copy.license;
-    document.querySelector("#made-by-label").textContent = copy.madeBy;
-    document.querySelector("#github-link").textContent = copy.github;
+    document.querySelector("#how-step-one").firstChild.textContent = `${copy.howStepOne} `;
+    document.querySelector("#how-step-two").textContent = copy.howStepTwo;
+    document.querySelector("#how-step-three").textContent = copy.howStepThree;
+    document.querySelector("#marker-download").textContent = copy.marker;
     document
       .querySelector("#lang-id")
       .setAttribute("aria-pressed", language === "id");
